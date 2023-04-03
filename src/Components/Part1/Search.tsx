@@ -1,21 +1,16 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useQuery } from '@tanstack/react-query';
 
 interface Props {
   value: string | null;
   setValue: Dispatch<SetStateAction<string | null>>;
+  data: any;
+  isLoading: boolean;
+  error: string;
 }
 
-export const Search: React.FC <Props> = ({value, setValue}) => {
-  const { data, isLoading, error }: any = useQuery({
-    queryKey: ['repoData'],
-    queryFn: () =>
-      fetch('https://rickandmortyapi.com/api/character').then(
-        (res) => res.json(),
-      ),
-  });
+export const Search: React.FC <Props> = ({ value, setValue, data, isLoading, error }) => {
   const [options, setOptions] = React.useState([]);
   const [inputValue, setInputValue] = React.useState('');
 
