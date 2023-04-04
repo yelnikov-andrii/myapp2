@@ -42,7 +42,13 @@ function App() {
   const firstElement = page * countPerPage - countPerPage;
   const lastElement = page * countPerPage;
 
-  const displayingData = filteredData.slice(firstElement, lastElement);
+  const displayingData = (filteredData && filteredData.slice(firstElement, lastElement)) || null;
+
+  React.useEffect(() => {
+    if (page > countOfPages) {
+      setPage(1);
+    }
+  }, [filteredData])
 
   return (
     <Container>
